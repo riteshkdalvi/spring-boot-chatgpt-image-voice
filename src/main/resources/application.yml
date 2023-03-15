@@ -1,0 +1,40 @@
+
+server:
+  port: 8500
+  servlet:
+    context-path: /
+
+openai-service:
+  api-key: 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
+  gpt-model: gpt-3.5-turbo
+  audio-model: whisper-1
+  http-client:
+    read-timeout: 30000
+    connect-timeout: 30000
+  urls:
+    base-url: https://api.openai.com/v1
+    chat-url: /chat/completions
+    image-url: /images/generations
+    create-transcription-url: /audio/transcriptions
+
+logging:
+  level:
+    com.synechron.chatgptmicroservice: TRACE
+
+# Spring
+spring:
+  jackson:
+    default-property-inclusion: NON_NULL
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: 'ALWAYS'
+  health:
+    circuitbreakers:
+      enabled: true
